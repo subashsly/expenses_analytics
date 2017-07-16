@@ -1,0 +1,24 @@
+<div class="container">
+<div class="reminder">
+            <span><h3>Bill Reminders</h3> | <%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-success' %><br/> </span>
+        <br />
+        <%#= will_paginate @reminders %>
+            <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+
+            <tbody class="income-index">
+                <%= render "index" %>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,56 @@
+
+
+	
+	<div class="cd-main-header" style="width: 100% !important;">
+		<%= link_to "Expense Analytics", root_path, class: 'navbar-brand page-scroll' %>
+		<% if logged_in? %>
+		<div class="cd-search is-hidden">
+			<form action="#0">
+				<input type="search" placeholder="Search...">
+			</form>
+		</div> <!-- cd-search -->
+		<% end %>
+
+		<a href="#0" class="cd-nav-trigger"><span></span></a>
+
+		<nav class="cd-nav">
+			<ul class="cd-top-nav">
+				<!-- <li><a href="#0">Tour</a></li>
+				<li><a href="#0">Support</a></li> -->
+				<li><%= link_to "<i class='fa fa-plus' aria-hidden='true'></i> ".html_safe, '#'%></li>
+				<li><%= link_to "<i class='fa fa-download ' aria-hidden='true'></i> ".html_safe, '#', onclick: "printDiv('chart')" %></li>
+				<% if logged_in? %>
+
+						<% if current_member.admin? %>
+							<li><%= link_to "Members", members_path %></li>
+						<% end %>
+						<li class="has-children account">
+							<a href="#0"><img src="/assets/cd-avatar.png" alt="avatar">Account</a>
+							<ul>
+								<li><%= link_to "Profile", current_member %></li>
+								<li><%= link_to "Settings", edit_member_path(current_member) %></li>
+								<li class="divider"></li>
+								<li><%= link_to "Log out", logout_path, method: "delete" %></li>
+							</ul>
+						</li>
+						
+						<% else %>
+							<li>
+							<%= link_to "Sign Up", signup_path, class: 'page-scroll'	%>
+						</li>
+						<li>
+							<%= link_to '<i class="fa fa-sign-in"></i>'.html_safe.concat("Log In"), login_path %>
+						</li>
+					<% end %>
+
+
+				
+			</ul>
+		</nav>
+	</div> <!-- .cd-main-header -->
+
+
+
+
+
+	

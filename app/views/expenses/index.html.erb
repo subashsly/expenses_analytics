@@ -1,0 +1,38 @@
+<% provide(:title, "Expenses") %>
+<div class="container">
+	<div class="expense">
+	<br/>
+		<%= link_to "Add Expense", new_expense_path, 
+				remote: true, class: 'btn btn-success' %>
+
+	</div>
+	<br/>
+	<div class="new-income"></div>
+
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<td>Title</td>
+				<td>Description</td>
+				<td>Amount</td>
+				<td>Date</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</thead>
+
+		<tbody class="expense-index">
+			<%#= render 'index' %>
+			<div id="ajax">
+				<%= render :partial => 'index' %>
+			</div>
+		</tbody>
+	</table>
+</div>
+<div id="expense-modal" class="modal fade"></div>
+
+
+<!-- 
+<div id="ajax">
+	<%#= render :template => 'expenses/index' %>
+</div> -->

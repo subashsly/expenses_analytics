@@ -1,0 +1,9 @@
+<h1>Expense Analytics</h1>
+<p>Hi <%= @member.member_name %></p>
+
+<p>
+  Welcome to Expense Analytics! Click on the link below to activate your account:
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@member.activation_token,
+																										member_email: @member.member_email) %>

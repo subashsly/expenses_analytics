@@ -1,0 +1,195 @@
+<% provide(:title, current_member.member_name) %>
+<!-- <div class="container"> -->
+<div class="row" data-no-turbolink="true" >
+    <!-- <aside class="col-md-4"> -->
+        <!-- <section class="user_info"> -->
+            <!-- <h1> -->
+                <!-- <p><%= gravatar_for @member %></p> -->
+                <!-- Check alternative later. -->
+                <!-- <br><br><br><br><br> -->
+                <!-- <p>Name: <%= @member.member_name %></p> -->
+                <!-- <p>Email: <%= @member.member_email %></p> -->
+                <!-- <p>Country: <%= @member.member_country %></p> -->
+                <!-- <p>Month's Saving: </p> -->
+            <!-- </h1> -->
+
+
+            <!-- Check alternative later. -->
+            <!-- <br><br><br><br><br><br> -->
+            <!-- <p>Money Left: <%= link_to("Add Income", '#') %></p> -->
+
+            
+            <!-- Check for alternative -->
+            <!-- <br><br><br><br> -->
+            <!-- <p><%= link_to "Edit my profile", edit_member_path(current_member), :style => "color: white;"%></p> -->
+        <!-- </section> -->
+    <!-- </aside> -->
+    <!-- <div class="col-md-12"> -->
+    <br/>
+        <div class="income">
+        
+            <%= link_to "Expenses", expenses_path, class: "btn btn-small btn-success" %>
+            <%= link_to "Incomes", incomes_path, class: "btn btn-small btn-success" %>
+            <%= link_to "Reminders", reminders_path, class: "btn btn-small btn-success" %>
+            <%= link_to "Tags", '#', class: "btn btn-small btn-success" %>
+           
+        </div>
+        <br />
+        <table class="table ">
+            <thead>
+                <th><%= "net worth".upcase %></th>
+                <th><%= "income".upcase %></th>
+                <th><%= "expense".upcase %></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <% if @total < 0 %>
+                        <td style = "color: red;"><h3><%= number_with_delimiter(@total, :delimiter => ',') %></h3></td>
+                    <% else %>
+                        <td style = "color: green;"><h3>+<%= number_with_delimiter(@total, :delimiter => ',') %></h3></td>
+                    <% end %>
+
+                    
+                    <td style = "color: green"><h3>+<%= number_with_delimiter(current_member.incomes.sum(:amount), :delimiter => ",") %></h3></td>
+                    <td style = "color: red"><h3>-<%= number_with_delimiter(current_member.expenses.sum(:amount), :delimiter => ",") %></h3></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="container">
+            <!-- <div class="test" id="new_test">
+
+            </div> -->
+            <div class="row" id="chart">
+                <div class="col-xs-6 col-sm-6" id="printChart" style="height: 400px; width: 40vw;"></div>
+                <div class="col-xs-6 col-sm-6" id="pieChart" style="height: 400px; width: 40vw;"></div>
+            </div>
+        </div>
+        <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('chart')" %>
+        <hr />
+        <div class="reminder">
+            <span><h3>Bill Reminders</h3> | 
+            <%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-default' %> </span>
+        <br />
+        <%#= will_paginate @reminders %>
+            <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+
+            <tbody class="income-index">
+                <%= render "reminders/index" %>
+            </tbody>
+            </table>
+        </div>
+    </div>
+<!-- </div> -->
+<!-- </div> -->
+<!-- Javascript for running chart (Line chart and PieChart) -->
+<script>
+    $(document).ready(function () {
+    $('#printChart').highcharts({
+        chart: {
+            type: 'line'
+            
+        },
+        title: {
+            text: 'Expenses and Incomes'
+        },
+        credits: {
+            enabled: false
+        },
+        subtitle: {
+            text: 'Source: ExpenseAnalytics.com'
+        },
+        xAxis: {
+
+            type: 'datetime',
+            
+        },
+
+        yAxis: {
+            title: {
+                text: 'Currency'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                    
+                },
+                enableMouseTracking: true
+            }
+        },
+        series: [{
+                    pointInterval: <%= 1.day * 1000 %>,
+                    pointStart: <%= 3.weeks.ago.to_i * 1000%>,
+                    name: 'Income',color: 'green',
+                        data: <%= (3.weeks.ago.to_date..Date.today).map{|date| Income.total_on(date).to_f}.inspect%>
+                    },
+                    {
+                        pointInterval: <%= 1.day * 1000 %>,
+                    pointStart: <%= 3.weeks.ago.to_i * 1000%>,
+                        name: 'Expenses',
+                         data: <%= (3.weeks.ago.to_date..Date.today).map{|date| Expense.total_on(date).to_f}.inspect%>
+            }]
+    });
+});
+
+
+// For Pie-chart
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#pieChart').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: 'Comparison Chart of Expense and Income'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Analytics',
+                colorByPoint: true,
+                data: [{
+                    name: 'Expenses',
+                    y: <%= current_member.expenses.sum(:amount) %>,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Incomes',
+                    y: <%= current_member.incomes.sum(:amount) %>,
+                    color: 'green'
+                }]
+            }]
+        });
+    });
+});
+</script>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= render 'layouts/shim' %>
+  <!-- Including Highcharts and Framework -->
+</head>
+<!-- <body>
+
+		<div class="container">
+				<%#= render 'layouts/header' %>
+
+				<%# flash.each do |message_type, message| %>
+					<div class="alert alert-<%#= message_type %>"><%#= message %></div>
+				<%# end %>
+				<%#= yield %>	
+
+				<%#= render 'layouts/footer' %>
+		</div>
+
+</body> -->
+<body id="page-top" <%= "data-no-turbolinks='true'".html_safe if controller_name=="members" && action_name=="show" %>>
+<%= render 'layouts/header' %>	
+<% if logged_in? %>
+	<main class="cd-main-content">
+		<nav class="cd-side-nav">
+			<ul>
+				<li class="cd-label">Main</li>
+				<li><%= link_to "Dashboard", root_path %></li>
+				<li class="has-children overview">
+					<a href="#">Reports</a>
+					
+					<ul>
+						<li><%= link_to "Expense", expenses_path, class: "btn btn-small btn-success" %></li>
+						<li><%= link_to "Income", incomes_path, class: "btn btn-small btn-success" %></li>
+					</ul>
+				</li>
+				<li class="has-children overview">
+					<a href="#">Reminders</a>
+					<ul>
+						<li><%= link_to "View Reminders", reminders_path, class: "btn btn-small btn-success" %></li>
+						<li><%= link_to "Add Reminder",new_reminder_path(@reminder), class: "btn btn-small btn-success" %></li>
+					</ul>
+				</li>
+				<li class="has-children notifications active">
+					<a href="#0">Notifications<span class="count">3</span></a>
+					
+					<ul>
+						<li><a href="#0">All Notifications</a></li>
+						<li><a href="#0">Friends</a></li>
+						<li><a href="#0">Other</a></li>
+					</ul>
+				</li>
+
+				<li class="has-children comments">
+					<a href="#0">Comments</a>
+					
+					<ul>
+						<li><a href="#0">All Comments</a></li>
+						<li><a href="#0">Edit Comment</a></li>
+						<li><a href="#0">Delete Comment</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul>
+				<li class="cd-label">Secondary</li>
+				<li class="has-children users">
+					<a href="#0">Contacts</a>
+					
+					<ul>
+						<li><%= link_to "Add Contact", members_path %></li>
+						<li><a href="#0">Edit User</a></li>
+						<li><a href="#0">Add User</a></li>
+					</ul>
+				</li>
+				<li class="has-children bookmarks">
+					<a href="#0">Bookmarks</a>
+					
+					<ul>
+						<li><a href="#0">All Bookmarks</a></li>
+						<li><a href="#0">Edit Bookmark</a></li>
+						<li><a href="#0">Import Bookmark</a></li>
+					</ul>
+				</li>
+				<li class="has-children images">
+					<a href="#0">Images</a>
+					
+					<ul>
+						<li><a href="#0">All Images</a></li>
+						<li><a href="#0">Edit Image</a></li>
+					</ul>
+				</li>
+
+				<li class="has-children users">
+					<a href="#0">Users</a>
+					
+					<ul>
+						<li><%= link_to "All Users", members_path %></li>
+						<li><a href="#0">Edit User</a></li>
+						<li><a href="#0">Add User</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul>
+				<li class="cd-label">Action</li>
+				<li class="action-btn"><a href="#0">+ Button</a></li>
+			</ul>
+		</nav>
+		<% end %>
+
+
+		<div class="content-wrapper">
+				
+		<% if notice %>
+			<div id="notice_wrapper">
+				<p class="notice"><%= notice %></p>
+			</div>
+		<% elsif alert %>
+			<div id="notice_wrapper">
+			<p class="alert"><%= alert %></p>
+			</div>
+		<% end %>
+		
+			<% flash.each do |message_type, message| %>
+				<div class="alert-<%= message_type %>">
+					<% if message %>
+						<div id="notice_wrapper">
+							<p class="notice"><%= message %></p>
+						</div>
+					<% end %>
+				</div>
+			<% end %>
+		<%= yield %>
+
+		<%= render 'layouts/footer' %>
+		</div> <!-- .content-wrapper -->
+		
+	</main> <!-- .cd-main-content -->
+
+
+
+
+
+
+
+
+			
+	
+
+
+
+
+	
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  
+
+</head>
+<body>
+ 
+
+ 
+</body>
+</html>

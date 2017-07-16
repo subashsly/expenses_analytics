@@ -1,0 +1,31 @@
+<% provide(:title, "Income") %>
+<div class="container">
+	<div class="income">
+	<br/>
+		<%= link_to "Add Income", new_income_path,
+				remote: true, class: 'btn btn-success' %>
+	</div>
+	<br/>
+
+	<div class="new-income"></div>
+	<%= will_paginate @incomes %>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Date</th>
+					<th>Amount</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+
+			<tbody class="income-index">
+				<%= render "index" %>
+			</tbody>
+		</table>
+	<%= will_paginate @incomes %>
+	<%= @income_count%>
+</div>
+<div id="income-modal" class="modal fade"></div>

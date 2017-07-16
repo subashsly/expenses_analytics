@@ -1,0 +1,3 @@
+Hi <%= @member.member_name %>
+Welcome to Expense Analytics! Click on the link below to activate your account:
+<%= edit_account_activation_url(@member.activation_token, member_email: @member.member_email) %>

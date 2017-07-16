@@ -1,0 +1,12 @@
+<% if current_member.reminders != nil %>
+		<% current_member.reminders.each do |reminder| %>
+			<tr>
+				<td><%= reminder.title %></td>
+				<td><%= reminder.amount %></td>
+				<td><%= reminder.date_notify %></td>
+				<td><%= link_to "Edit", edit_reminder_path(reminder),
+								class: 'btn btn-default' %></td>
+				<td><%= link_to "Delete", reminder, method: :delete, data: { Confirm: "Are you sure you want to remove this reminder?" }, class: 'btn btn-danger'  %></td>
+			</tr>
+		<% end %>
+<% end %>

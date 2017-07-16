@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+first:
+  title: "First Salary"
+  description: "This is first Salary."
+  amount: 1200
+  date: "2015/12/12"
+  created_at: <%= 10.minutes.ago %>
+
+second:
+  title: "Second Salary"
+  description: "This is second salary."
+  amount: 2000
+  date: "2015/12/11"
+  created_at: <%= 2.hours.ago %>
+
+third:
+  title: "Third Salary"
+  description: "This is third salary."
+  amount: 3000
+  date: "2015/12/10"
+  created_at: <%= 10.minutes.ago %>
+
+fourth:
+  title: "Fourth Salary"
+  description: "This is fourth salary."
+  amount: 4000
+  date: "2015/12/09"
+  created_at: <%= 3.years.ago %>

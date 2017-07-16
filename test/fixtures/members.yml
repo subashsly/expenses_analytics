@@ -1,0 +1,42 @@
+bibek:
+ member_name: Bibek Khadka
+ member_email: bibek@gmail.com
+ member_country: Nepal
+ password_digest: <%= Member.digest('password') %>
+ admin: true
+ activated: true
+ activated_at: <%= Time.zone.now %>
+
+kedar:
+ member_name: Kedar Baral
+ member_email: kedar@gmail.com
+ member_country: China
+ password_digest: <%= Member.digest('password') %>
+ activated: true
+ activated_at: <%= Time.zone.now %>
+
+bishek:
+ member_name: Bishek Khadgi
+ member_email: bishek@gmail.com
+ member_country: Nepal
+ password_digest: <%= Member.digest('password') %>
+ activated: true
+ activated_at: <%= Time.zone.now %>
+
+mahesh:
+ member_name: Mahesh Bura
+ member_email: mahesh@gmail.com
+ member_country: Japan
+ password_digest: <%= Member.digest('password') %>
+ activated: true
+ activated_at: <%= Time.zone.now %>
+
+<% 30.times do |n| %>
+member_<%= n %>:
+ member_name: <%= "Member #{n}" %>
+ member_email: <%= "member-#{n}@gmail.com" %>
+ member_country: <%= "Nepal" %>
+ password_digest: <%= Member.digest('password') %>
+ activated: true
+ activated_at: <%= Time.zone.now %>
+<% end %>
