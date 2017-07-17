@@ -31,23 +31,22 @@ class RemindersController < ApplicationController
 
 
 	def create
-		@reminder = Reminder.new(reminder_params.merge(member_id: current_member.id))
-		if @reminder.save
-			flash[:info] = "Reminder has been added."
-			redirect_to member_path(id: current_member.id)
-		else
-			render 'new'
-		end
+		@reminders = current_member.reminders
+  		@reminder = Reminder.create(reminder_params.merge(member_id: current_member.id))
 	end
 
-	def destroy
-		@reminder = Reminder.find(params[:id])
-		@reminder.destroy
-		redirect_to member_path(id: current_member.id)
-	end
+	def delete
+  	@reminder = Reminder.find(params[:reminder_id])
+  end
+
+  def destroy
+  	@reminders = current_member.reminders
+  	@reminder = Reminder.find(params[:id])
+  	@reminder.destroy
+  end
 
 	private
 		def reminder_params	
-			params.require(:reminder).permit(:title, :amount, :description, :date_notify, :member_id)
+			params.require(:reminder).permit(:title, :amount, :description, :date_notify, :member_id).merge(member_id: current_member.id)
 		end
 end

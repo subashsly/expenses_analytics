@@ -1,19 +1,13 @@
-<div class="row">
-	<div class="col col-md-6 ">
-		<%= form_for(@reminder) do |f| %>
+<div class="modal-dialog">
+	<div class="modal-content">
+		<%= form_for @reminder, remote: true, html: { style: "display:inline" } do |f| %>
+			<div class="modal-body">
+			<h2 style="color: red;">Add Reminder</h2>
+				<ul class="errors"></ul>
 			
-			<% if @reminder.errors.any? %>
-				<div id="error_explanation">
-					<div class="alert alert-danger">
-						The form contains <%= pluralize(@reminder.errors.count, "error") %>.
-					</div>
-					<ul>
-						<% @reminder.errors.full_messages.each do |msg| %>
-						<li><%= msg %></li>
-						<% end %>
-					</ul>
-				</div>
-			<% end %>
+
+				<%= f.hidden_field :member_id, :value => @reminder.member_id %>
+
 
 			<div class="form-group">
 				<%= f.label :title, class: "control-label" %>

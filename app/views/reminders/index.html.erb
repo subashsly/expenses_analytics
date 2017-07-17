@@ -1,6 +1,6 @@
 <div class="container">
 <div class="reminder">
-            <span><h3>Bill Reminders</h3> | <%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-success' %><br/> </span>
+            <span><h3>Bill Reminders</h3>  <%= link_to "Add Reminder", new_reminder_path,remote: true, class: 'btn btn-success' %><br/> </span>
         <br />
         <%#= will_paginate @reminders %>
             <table class="table table-bordered table-striped">
@@ -14,7 +14,7 @@
                 </tr>
             </thead>
 
-            <tbody class="income-index">
+            <tbody class="reminder-index">
                 <%= render "index" %>
             </tbody>
             </table>
@@ -22,3 +22,5 @@
     </div>
 </div>
 </div>
+
+<div id="reminder-modal" class="modal fade"></div>

@@ -7,6 +7,7 @@ jQuery(document).ready(function(){
 		topNavigation = $('.cd-top-nav'),
 		searchForm = $('.cd-search'),
 		accountInfo = $('.account');
+		addInfo = $('.add');
 
 	//on resize, move search and top nav position according to window width
 	var resizing = false;
@@ -65,6 +66,41 @@ jQuery(document).ready(function(){
 		if( !$(event.target).is('.has-children a') ) {
 			sidebar.find('.has-children.selected').removeClass('selected');
 			accountInfo.removeClass('selected');
+		}
+	});
+
+
+	//click on item and show submenu
+	$('.has-children > a').on('click', function(event){
+		var mq = checkMQ(),
+			selectedItem = $(this);
+		if( mq == 'mobile' || mq == 'tablet' ) {
+			event.preventDefault();
+			if( selectedItem.parent('li').hasClass('selected')) {
+				selectedItem.parent('li').removeClass('selected');
+			} else {
+				sidebar.find('.has-children.selected').removeClass('selected');
+				addInfo.removeClass('selected');
+				selectedItem.parent('li').addClass('selected');
+			}
+		}
+	});
+
+	//click on add and show submenu - desktop version only
+	addInfo.children('a').on('click', function(event){
+		var mq = checkMQ(),
+			selectedItem = $(this);
+		if( mq == 'desktop') {
+			event.preventDefault();
+			addInfo.toggleClass('selected');
+			sidebar.find('.has-children.selected').removeClass('selected');
+		}
+	});
+
+	$(document).on('click', function(event){
+		if( !$(event.target).is('.has-children a') ) {
+			sidebar.find('.has-children.selected').removeClass('selected');
+			addInfo.removeClass('selected');
 		}
 	});
 

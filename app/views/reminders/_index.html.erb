@@ -6,7 +6,7 @@
 				<td><%= reminder.date_notify %></td>
 				<td><%= link_to "Edit", edit_reminder_path(reminder),
 								class: 'btn btn-default' %></td>
-				<td><%= link_to "Delete", reminder, method: :delete, data: { Confirm: "Are you sure you want to remove this reminder?" }, class: 'btn btn-danger'  %></td>
+				<td><%= link_to "Delete", reminder_delete_path(reminder), remote: true, class: 'btn btn-danger'  %></td>
 			</tr>
 		<% end %>
 <% end %>

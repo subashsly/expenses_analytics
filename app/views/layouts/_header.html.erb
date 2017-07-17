@@ -17,7 +17,17 @@
 			<ul class="cd-top-nav">
 				<!-- <li><a href="#0">Tour</a></li>
 				<li><a href="#0">Support</a></li> -->
-				<li><%= link_to "<i class='fa fa-plus' aria-hidden='true'></i> ".html_safe, '#'%></li>
+				<li class="has-children add">
+							<%= link_to "<i class='fa fa-plus' aria-hidden='true'></i> ".html_safe, "#0", 
+				remote: true %>
+							
+							<ul>
+								<li><%= link_to "INCOME", new_income_path,remote: true %></li>
+								<li><%= link_to "EXPENSE", new_expense_path,remote: true %></li>	
+								<li><%= link_to "REMINDER", new_reminder_path,remote: true %></li>								
+							</ul>
+						</li>
+				
 				<li><%= link_to "<i class='fa fa-download ' aria-hidden='true'></i> ".html_safe, '#', onclick: "printDiv('chart')" %></li>
 				<% if logged_in? %>
 
