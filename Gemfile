@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+ gem "highcharts-rails", "~> 3.0.0"
 #bcrypt() is a sophisticated and secure hash algorithm designed by The OpenBSD project for hashing passwords. 
 #The bcrypt Ruby gem provides a simple wrapper for safely handling passwords.
 gem 'bcrypt', '~> 3.1', '>= 3.1.10'
