@@ -1,66 +1,76 @@
 
 
+<% if logged_in? %>
 	
 	<div class="cd-main-header" style="width: 100% !important;">
-		<%= link_to "Expense Analytics", root_path, class: 'navbar-brand page-scroll' %>
-		<% if logged_in? %>
+		<%= link_to "Expense Analytics", root_path, class: 'navbar-brand page-scroll logo' %>
+		
 		<div class="cd-search is-hidden">
 			<form action="#0">
 				<input type="search" placeholder="Search...">
 			</form>
 		</div> <!-- cd-search -->
-		<% end %>
 
 		<a href="#0" class="cd-nav-trigger"><span></span></a>
 
+
+
 		<nav class="cd-nav">
+
+
 			<ul class="cd-top-nav">
-				<!-- <li><a href="#0">Tour</a></li>
-				<li><a href="#0">Support</a></li> -->
-				<li class="has-children add">
+				<li class="has-children children add">
 							<%= link_to "<i class='fa fa-plus' aria-hidden='true'></i> ".html_safe, "#0", 
 				remote: true %>
 							
 							<ul>
-								<li><%= link_to "INCOME", new_income_path,remote: true %></li>
-								<li><%= link_to "EXPENSE", new_expense_path,remote: true %></li>	
-								<li><%= link_to "REMINDER", new_reminder_path,remote: true %></li>								
+								<li><%= link_to "INCOME", new_income_path,remote: true, class: "sign-up" %></li>
+								<li><%= link_to "EXPENSE", new_expense_path,remote: true, class: "sign-up" %></li>	
+								<li><%= link_to "REMINDER", new_reminder_path,remote: true, class: "sign-up" %></li>								
 							</ul>
 						</li>
 				
-				<li><%= link_to "<i class='fa fa-download ' aria-hidden='true'></i> ".html_safe, '#', onclick: "printDiv('chart')" %></li>
-				<% if logged_in? %>
+				<li class="children-li"><%= link_to "<i class=' fa fa-download ' aria-hidden='true'></i> ".html_safe, '#', onclick: "printDiv('chart')" %></li>
+				
 
 						<% if current_member.admin? %>
-							<li><%= link_to "Members", members_path %></li>
+							<li class="children-li"><%= link_to "Members", members_path %></li>
 						<% end %>
-						<li class="has-children account">
+						<li class="has-children children  account">
 							<a href="#0"><img src="/assets/cd-avatar.png" alt="avatar">Account</a>
 							<ul>
-								<li><%= link_to "Profile", current_member %></li>
-								<li><%= link_to "Settings", edit_member_path(current_member) %></li>
+								<li><%= link_to "Profile", current_member, class: "sign-up" %></li>
+								<li><%= link_to "Settings", edit_member_path(current_member), class: "sign-up" %></li>
 								<li class="divider"></li>
-								<li><%= link_to "Log out", logout_path, method: "delete" %></li>
+								<li><%= link_to "Log out", logout_path, method: "delete", class: "sign-up" %></li>
 							</ul>
 						</li>
-						
-						<% else %>
-							<li>
-							<%= link_to "Sign Up", signup_path, class: 'page-scroll'	%>
-						</li>
-						<li>
-							<%= link_to '<i class="fa fa-sign-in"></i>'.html_safe.concat("Log In"), login_path %>
-						</li>
-					<% end %>
 
 
 				
 			</ul>
 		</nav>
 	</div> <!-- .cd-main-header -->
+<% else %>
 
 
+  <nav class="navbar navbar-inverse offline-menu" style="border-radius: 0px !important;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <%= link_to "Expense Analytics", root_path, class: 'navbar-brand page-scroll logo' %>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+         <li><%= link_to '<i class="fa fa-sign-up"></i>'.html_safe.concat("Sign Up"),signup_path%></li>
+    <li><%= link_to '<i class="fa fa-sign-in"></i>'.html_safe.concat("Log In"), login_path %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-
-
-	
+<% end %>

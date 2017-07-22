@@ -22,6 +22,8 @@ body {
     height: 100%;
 }
 
+
+
 body {
     font-family: Merriweather,'Helvetica Neue',Arial,sans-serif;
 }
@@ -74,11 +76,67 @@ h6 {
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
 }
 
+.logo{
+    color:white;
+}
+.offline-menu{
+    background-color:#1985a1 !important;
+    border:0px;
+    // height:55px !important;
+    border-radius:0px !important;
+    margin-bottom:0px !important;
+    .logo{
+        color:white;
+        margin-left:20px !important;
+    }
+    li a{
+        color:white !important;
+    }
+
+}
+
 p {
     margin-bottom: 20px;
     font-size: 16px;
     line-height: 1.5;
 }
+
+.sign-up, .log-in, .edit-in{
+    transition: .3s all;
+}
+
+.sign-up:hover{
+        background: #1985a1 !important;
+        color:white !important;
+        text-decoration:none;
+   
+}
+
+.children{
+    background:#1985a1 !important;
+    
+}
+.children-li:hover{
+    background:#2c3136 !important;
+    cursor:pointer;
+
+}
+.children{
+    margin-top: -3px;
+
+}
+    
+
+
+.children:hover{
+    background:#2c3136 !important;
+    cursor:pointer;
+    
+}
+.form-title{
+    color:#1985a1;
+}
+
 
 .bg-primary {
     background-color: #1985a1;
@@ -87,6 +145,7 @@ p {
 .bg-dark {
     color: #fff;
     background-color: #1985a1;
+    height:300px;
 }
 
 .text-faded {
@@ -103,7 +162,6 @@ section {
 }
 aside {
     padding: 50px 0;
-    height:100vh;
 }
 
 aside.col-md-4 {
@@ -315,6 +373,13 @@ header .header-content .header-content-inner p {
 .service-box {
     margin: 50px auto 0;
     max-width: 400px;
+    transition: 1s all;
+}
+
+
+.service-box:hover{
+    transform:scale(1.1);
+    cursor: pointer;
 }
 
 @media(min-width:992px) {
@@ -467,7 +532,7 @@ fieldset[disabled] .btn-default.active {
 .open > .dropdown-toggle.btn-primary {
     border-color: #ed431f;
     color: #fff;
-    background-color: #ee4b28;
+    background-color: #5cb85c;
 }
 
 .btn-primary:active,
@@ -680,4 +745,23 @@ aside {
 
 /*Members index close*/
 
+.expenses-text{
+    font-weight:600;
+    color:#e64b30;
+   
+}
+.incomes-text{
+ color:#51b44f;
+ font-weight:600;
+}
+
+.copy-right{
+    padding:10px 0px;
+    background:#1985a1;
+    color:white;
+    p{
+        margin-bottom:0px !important;
+        text-align:center;
+    }
+}
 

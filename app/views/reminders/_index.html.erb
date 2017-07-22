@@ -1,10 +1,10 @@
 <% if current_member.reminders != nil %>
 		<% current_member.reminders.each do |reminder| %>
-			<tr>
+			<tr id="reminder-<%= reminder.id %>">
 				<td><%= reminder.title %></td>
 				<td><%= reminder.amount %></td>
 				<td><%= reminder.date_notify %></td>
-				<td><%= link_to "Edit", edit_reminder_path(reminder),
+				<td><%= link_to "Edit", edit_reminder_path(reminder),remote: true,
 								class: 'btn btn-default' %></td>
 				<td><%= link_to "Delete", reminder_delete_path(reminder), remote: true, class: 'btn btn-danger'  %></td>
 			</tr>

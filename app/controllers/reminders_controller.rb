@@ -19,14 +19,12 @@ class RemindersController < ApplicationController
 	end
 
 	def update
+
 		@reminders = current_member.reminders
 		@reminder = Reminder.find(params[:id])
 
-		if @reminder.update_attributes(reminder_params)
-			redirect_to member_path(id: current_member.id)
-		else
-			render 'edit'
-		end
+		 @reminder.update_attributes(reminder_params)
+		
 	end
 
 
@@ -40,7 +38,7 @@ class RemindersController < ApplicationController
   end
 
   def destroy
-  	@reminders = current_member.reminders
+  	
   	@reminder = Reminder.find(params[:id])
   	@reminder.destroy
   end

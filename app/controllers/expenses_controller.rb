@@ -1,5 +1,6 @@
 class ExpensesController < ApplicationController
- 
+   
+
   def index
     @expenses = current_member.expenses
     respond_to do |format|
@@ -39,16 +40,21 @@ class ExpensesController < ApplicationController
 
   def delete
   	@expense = Expense.find(params[:expense_id])
+     
   end
 
   def destroy
-  	@expenses = current_member.expenses
+  	
   	@expense = Expense.find(params[:id])
+     
   	@expense.destroy
+
   end
+
 
   private 
   	def expense_params
-  		params.require(:expense).permit(:title, :description, :amount, :date).merge(member_id: current_member.id)
+  		params.require(:expense).permit(:title, :description, :amount, :date, :category_id).merge(member_id: current_member.id)
   	end
+    
 end

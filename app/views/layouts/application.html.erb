@@ -10,6 +10,10 @@
      <link rel='icon' href='/assets/favicon.ico?v=5' type='image/x-icon' />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
   <%= render 'layouts/shim' %>
   <!-- Including Highcharts and Framework -->
 </head>
@@ -39,15 +43,24 @@
 					<a href="#">Reports</a>
 					
 					<ul>
-						<li><%= link_to "Expense", expenses_path, class: "btn btn-small btn-success" %></li>
-						<li><%= link_to "Income", incomes_path, class: "btn btn-small btn-success" %></li>
+						<li><%= link_to "Expense", expenses_path, class: "btn btn-small sign-up" %></li>
+						<li><%= link_to "Income", incomes_path, class: "btn btn-small sign-up" %></li>
 					</ul>
 				</li>
 				<li class="has-children overview">
 					<a href="#">Reminders</a>
 					<ul>
-						<li><%= link_to "View Reminders", reminders_path, class: "btn btn-small btn-success" %></li>
-						<li><%= link_to "Add Reminder",new_reminder_path(@reminder), class: "btn btn-small btn-success" %></li>
+						<li><%= link_to "View Reminders", reminders_path, class: "btn btn-small sign-up" %></li>
+						<li><%= link_to "Add Reminder",new_reminder_path(@reminder),remote: true, class: "btn btn-small sign-up" %></li>
+					</ul>
+				</li>
+				<li class="has-children overview">
+					<%= link_to "TAGS", categories_path%>
+					<ul>
+						<% current_member.categories.each do |category| %>
+							<li><%= link_to category.title, category_path(category.id)%></li>
+						<% end %>
+						<li><%= link_to "Add Tags",  new_category_path,remote: true, class: "btn btn-small sign-up" %></li>
 					</ul>
 				</li>
 				<li class="has-children notifications active">
@@ -141,9 +154,14 @@
 				</div>
 			<% end %>
 		<%= yield %>
+
 <div id="expense-modal" class="modal fade"></div>
+<div id="reminder-modal" class="modal fade"></div>
 <div id="income-modal" class="modal fade"></div>
+<div id="category-modal" class="modal fade"></div>
+		<%if !logged_in? %>
 		<%= render 'layouts/footer' %>
+		<% end %>
 		</div> <!-- .content-wrapper -->
 		
 	</main> <!-- .cd-main-content -->
@@ -162,7 +180,6 @@
 
 
 	
-  <script src="http://code.highcharts.com/highcharts.js"></script>
   
 
 </head>

@@ -1,8 +1,10 @@
 class IncomesController < ApplicationController
-	
+		
+
+
 	def index
 		@incomes = current_member.incomes.paginate(:page => 1, :per_page => 5)
-		@income_count=Income.count
+		
 	end
 
 	def show
@@ -31,18 +33,17 @@ class IncomesController < ApplicationController
 	end
 
 	def delete
-		@incomes = current_member.incomes
+		
 		@income = Income.find(params[:income_id])
 	end
 
 	def destroy
-		@incomes = current_member.incomes
 		@income = Income.find(params[:id])
 		@income.destroy
 	end
 
 	private
 		def income_params
-			params.require(:income).permit(:title, :description, :amount, :date, :member_id)
+			params.require(:income).permit(:title, :description, :amount, :date, :member_id, :category_id)
 		end
 end

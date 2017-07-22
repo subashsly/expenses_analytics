@@ -1,31 +1,52 @@
 <% provide(:title, "Expenses") %>
-<div class="container">
+<div class="contasiner">
 	<div class="expense">
 	<br/>
 		<%= link_to "Add Expense", new_expense_path, 
-				remote: true, class: 'btn btn-success' %>
-
+				remote: true, class: 'btn sign-up' %>
 	</div>
-	<br/>
-	<div class="new-income"></div>
 
-	<table class="table table-bordered table-striped">
+	
+	
+	<br/>
+	<br/><br/>
+	<%= amount=0%>
+<% @cat= Category.all %>
+	<% @cat.all.each do |x| %>
+		 <%=  x.expenses.each do |y|%>
+		 <%amount=amount +y.amount%>
+	<% end %>
+	<% end %>
+	<%= amount %>
+
+	<br/>
+		<div id="pie" style="height: 400px"></div>
+	
+	<table id="transaction" class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<td>Title</td>
-				<td>Description</td>
+				<!-- <td>Description</td> -->
+				<td>Tags</td>
 				<td>Amount</td>
 				<td>Date</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
+			<th colspan="2">Action</th>
 			</tr>
 		</thead>
 
 		<tbody class="expense-index">
-			<%#= render 'index' %>
-			<div id="ajax">
-				<%= render :partial => 'index' %>
-			</div>
+			<% @expenses.each do |expense| %>
+				<tr id="expense-<%= expense.id%>">
+					<td><%= expense.title %></td>
+					<!-- <td><%= expense.description %></td> -->
+					<td><%= expense.category.title %></td>
+					<td class="expenses-text" >- <%=number_with_delimiter(expense.amount, :delimiter => ',')  %></td>
+					<td><%= expense.date %></td>
+					<td><%= link_to "Edit", edit_expense_path(expense), 
+									remote: true, class: 'btn btn-default' %></td>
+					<td><%= link_to "Delete", expense_delete_path(expense), remote: true, class: 'btn btn-danger' %></td>
+				</tr>
+			<% end %>
 		</tbody>
 	</table>
 </div>
@@ -36,3 +57,36 @@
 <div id="ajax">
 	<%#= render :template => 'expenses/index' %>
 </div> -->
+<script type="text/javascript">
+	Highcharts.chart('pie', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Contents of Highsoft\'s weekly fruit delivery'
+    },
+    subtitle: {
+        text: '3D donut in Highcharts'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Delivered amount',
+        data: [
+            ['Banasssssnas', 12],
+            ['Kiwi', 3],
+            ['Mixed nuts', 1],
+            ['Oranges', 6]
+        ]
+    }]
+});
+</script>
+

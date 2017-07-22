@@ -3,29 +3,40 @@
 	<div class="income">
 	<br/>
 		<%= link_to "Add Income", new_income_path,
-				remote: true, class: 'btn btn-success' %>
+				remote: true, class: 'btn sign-up' %>
 	</div>
 	<br/>
 
 	<div class="new-income"></div>
 	<%= will_paginate @incomes %>
-		<table class="table table-bordered table-striped">
+		<table id="transaction" class="table table-bordered table-striped">
 			<thead>
 				<tr>
 					<th>Title</th>
-					<th>Description</th>
-					<th>Date</th>
+					<!-- <th>Description</th> -->
+					<th>Tags</th>
 					<th>Amount</th>
-					<th>&nbsp;</th>
-					<th>&nbsp;</th>
+					<th>Date</th>
+					<th colspan="2">Action</th>
 				</tr>
 			</thead>
 
 			<tbody class="income-index">
-				<%= render "index" %>
+				<% @incomes.each do |income| %>
+	<tr id="income-<%= income.id %>">
+		<td><%= income.title %></td>
+		<!-- <td><%= income.description %></td> -->
+		<td><%= income.category.title %></td>
+		<td class="incomes-text" >+ <%= number_with_delimiter(income.amount, :delimiter => ',') %></td>
+		<td><%= income.date %></td>
+		<td><%= link_to "Edit", edit_income_path(income),
+						remote: true, class: 'btn btn-default' %></td>
+		<td><%= link_to "Delete", income_delete_path(income), remote: true, class: 'btn btn-danger'  %></td>
+	</tr>
+<% end %>
 			</tbody>
 		</table>
 	<%= will_paginate @incomes %>
-	<%= @income_count%>
+	
 </div>
 <div id="income-modal" class="modal fade"></div>

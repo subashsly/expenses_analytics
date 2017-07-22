@@ -28,10 +28,10 @@
     <br/>
         <div class="income">
         
-            <%= link_to "Expenses", expenses_path, class: "btn btn-small btn-success" %>
-            <%= link_to "Incomes", incomes_path, class: "btn btn-small btn-success" %>
-            <%= link_to "Reminders", reminders_path, class: "btn btn-small btn-success" %>
-            <%= link_to "Tags", '#', class: "btn btn-small btn-success" %>
+            <%= link_to "Expenses", expenses_path, class: "btn btn-small sign-up" %>
+            <%= link_to "Incomes", incomes_path, class: "btn btn-small sign-up" %>
+            <%= link_to "Reminders", reminders_path, class: "btn btn-small sign-up" %>
+            <%= link_to "Tags", '#', class: "btn btn-small sign-up" %>
            
         </div>
         <br />
@@ -69,23 +69,39 @@
         <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('chart')" %>
         <hr />
         <div class="reminder">
-            <span><h3>Bill Reminders</h3> | 
-            <%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-default' %> </span>
+            <span><h3>Transaction</h3> | 
+            <%= link_to "Add Reminder", new_reminder_path(@reminder),remote: true, class: 'btn btn-default' %> </span>
         <br />
         <%#= will_paginate @reminders %>
-            <table class="table table-bordered table-striped">
+            <table id="transaction" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Tags</th>
                     <th>Amount</th>
                     <th>Date</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
+                    <th colspan="2">Action</th>
                 </tr>
             </thead>
 
             <tbody class="income-index">
-                <%= render "reminders/index" %>
+                <% @transaction.each do |transaction| %>
+                    <tr>
+                        <td><%= transaction.title %></td>
+                        <td><%= transaction.category.title %></td>
+                        
+                        <%if transaction.class.table_name=="incomes"%>
+                            <td class="incomes-text">+ <%= number_with_delimiter(transaction.amount, :delimiter => ',')   %></td>
+                        <% else %>
+                             <td class="expenses-text">- <%= number_with_delimiter(transaction.amount, :delimiter => ',')  %></td>
+                         <% end %>
+                        <td><%= transaction.date %></td>
+                        
+                        <td><%= link_to "Edit",  "#", 
+                                        remote: true, class: 'btn btn-default' %></td>
+                        <td><%= link_to "Delete", "#", remote: true, class: 'btn btn-danger' %></td>
+                    </tr>
+                <% end %>
             </tbody>
             </table>
         </div>
@@ -124,22 +140,26 @@
             line: {
                 dataLabels: {
                     enabled: true
+
                     
-                },
-                enableMouseTracking: true
+                },marker: {
+                    enabled: false
+        },
+                enableMouseTracking: true,
+
             }
         },
         series: [{
                     pointInterval: <%= 1.day * 1000 %>,
                     pointStart: <%= 3.weeks.ago.to_i * 1000%>,
                     name: 'Income',color: 'green',
-                        data: <%= (3.weeks.ago.to_date..Date.today).map{|date| Income.total_on(date).to_f}.inspect%>
+                        data: <%= (3.weeks.ago.to_date..Date.today).map{|date| @income.total_on(date).to_f}.inspect%>
                     },
                     {
                         pointInterval: <%= 1.day * 1000 %>,
                     pointStart: <%= 3.weeks.ago.to_i * 1000%>,
                         name: 'Expenses',
-                         data: <%= (3.weeks.ago.to_date..Date.today).map{|date| Expense.total_on(date).to_f}.inspect%>
+                         data: <%= (3.weeks.ago.to_date..Date.today).map{|date| @expense.total_on(date).to_f}.inspect%>
             }]
     });
 });

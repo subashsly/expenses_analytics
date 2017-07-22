@@ -1,0 +1,51 @@
+<% provide(:title, "Tags") %>
+<div class="container">
+	<div class="expense">
+	<h2><%=@category.title %></h2>
+	
+		<%= link_to "Add Tag", new_category_path, 
+				remote: true, class: 'btn btn-success' %>
+				<%= link_to "Edit", edit_category_path(@category), 
+					remote: true, class: 'btn btn-default' %>
+	<%= link_to "Delete", category_delete_path(@category), remote: true, class: 'btn btn-danger' %>
+
+	</div>
+	<br/>
+	<div class="new-income"></div>
+
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<td>Title</td>
+				<td>Tags</td>
+				<td>Amount</td>
+				<td>Date</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</thead>
+
+		<tbody class="category-index">
+			<% @category_data.each do |category| %>
+<tr>
+	<td><%= category.title %></td>
+	<td><%= category.category.title %></td>
+
+	<%if category.class.table_name=="incomes"%>
+		<td class="incomes-text">+ <%= category.amount  %></td>
+	<% else %>
+		<td class="expenses-text">- <%= category.amount  %></td>
+	<% end %>
+	
+	<td><%= category.date %></td>
+	
+	<td><%= link_to "Edit", edit_category_path(category), 
+					remote: true, class: 'btn btn-default' %></td>
+	<td><%= link_to "Delete", category_delete_path(category), remote: true, class: 'btn btn-danger' %></td>
+</tr>
+<% end %>
+		</tbody>
+	</table>
+</div>
+<div id="category-modal" class="modal fade"></div>
+

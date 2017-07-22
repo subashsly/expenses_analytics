@@ -1,0 +1,46 @@
+<% provide(:title, "Tags") %>
+<div class="container">
+	<div class="expense">
+	<br/>
+		<%= link_to "Add Tag", new_category_path, 
+				remote: true, class: 'btn sign-up' %>
+
+	</div>
+	<br/>
+
+	<table id="category" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<td>Title</td>
+				<td>Description</td>
+				<td>Tags</td>
+				<td>Amount</td>
+				<td>Date</td>
+				<th colspan="2">Action</th>
+			</tr>
+		</thead>
+
+		<tbody class="category-index">
+			<%#= render 'index' %>
+			<div id="ajax">
+				<% @categories.each do |category| %>
+					<tr id="category-<%= category.id%>">
+						<td><%= category.title %></td>
+						<td><%= category.description %></td>
+						
+						<td><%= link_to "Edit", edit_category_path(category), 
+										remote: true, class: 'btn btn-default' %></td>
+						<td><%= link_to "Delete", category_delete_path(category), remote: true, class: 'btn btn-danger' %></td>
+					</tr>
+				<% end %>
+			</div>
+		</tbody>
+	</table>
+</div>
+<div id="category-modal" class="modal fade"></div>
+
+
+<!-- 
+<div id="ajax">
+	<%#= render :template => 'expenses/index' %>
+</div> -->

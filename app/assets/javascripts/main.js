@@ -4,6 +4,7 @@ jQuery(document).ready(function(){
 		header = $('.cd-main-header'),
 		sidebar = $('.cd-side-nav'),
 		sidebarTrigger = $('.cd-nav-trigger'),
+		
 		topNavigation = $('.cd-top-nav'),
 		searchForm = $('.cd-search'),
 		accountInfo = $('.account');
@@ -46,6 +47,7 @@ jQuery(document).ready(function(){
 			} else {
 				sidebar.find('.has-children.selected').removeClass('selected');
 				accountInfo.removeClass('selected');
+				addInfo.removeClass('selected');
 				selectedItem.parent('li').addClass('selected');
 			}
 		}
@@ -62,31 +64,7 @@ jQuery(document).ready(function(){
 		}
 	});
 
-	$(document).on('click', function(event){
-		if( !$(event.target).is('.has-children a') ) {
-			sidebar.find('.has-children.selected').removeClass('selected');
-			accountInfo.removeClass('selected');
-		}
-	});
-
-
-	//click on item and show submenu
-	$('.has-children > a').on('click', function(event){
-		var mq = checkMQ(),
-			selectedItem = $(this);
-		if( mq == 'mobile' || mq == 'tablet' ) {
-			event.preventDefault();
-			if( selectedItem.parent('li').hasClass('selected')) {
-				selectedItem.parent('li').removeClass('selected');
-			} else {
-				sidebar.find('.has-children.selected').removeClass('selected');
-				addInfo.removeClass('selected');
-				selectedItem.parent('li').addClass('selected');
-			}
-		}
-	});
-
-	//click on add and show submenu - desktop version only
+	//click on account and show submenu - desktop version only
 	addInfo.children('a').on('click', function(event){
 		var mq = checkMQ(),
 			selectedItem = $(this);
@@ -100,9 +78,12 @@ jQuery(document).ready(function(){
 	$(document).on('click', function(event){
 		if( !$(event.target).is('.has-children a') ) {
 			sidebar.find('.has-children.selected').removeClass('selected');
+			accountInfo.removeClass('selected');
 			addInfo.removeClass('selected');
 		}
 	});
+
+
 
 	//on desktop - differentiate between a user trying to hover over a dropdown item vs trying to navigate into a submenu's contents
 	sidebar.children('ul').menuAim({

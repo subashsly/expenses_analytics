@@ -14,6 +14,15 @@ Member.create!(member_name: "Example User",
 								admin: true,
 								activated: true,
 								activated_at: Time.zone.now)
+Member.create!(member_name: "subash shahi",
+								member_email: "subash_slide@gmail.com",
+								member_country: "Nepal",
+								password: "subash",
+								password_confirmation: "subash",
+								admin: true,
+								activated: true,
+								activated_at: Time.zone.now)
+
 
 10.times do |n|
 	member_name = Faker::Name.name

@@ -18,5 +18,6 @@ module ApplicationHelper
 	# 	options[:outer_window] ||= 1
 	# 	will_paginate(collection, options)
 	# end
+	# 
 
 end

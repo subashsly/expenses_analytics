@@ -1,8 +1,5 @@
-<div class="modal-dialog">
-	<div class="modal-content">
 		<%= form_for @income, remote: true, html: { style: "display:inline;" } do |f| %>
 			<div class="modal-body">
-			<h2 style="color: green;">Add Income</h2>
 				<ul class="errors"></ul>
 				
 				<div class="form-group">
@@ -18,9 +15,13 @@
 					<%= f.text_area :description, class: 'form-control' %>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group col-md-6">
 					<%= f.label :amount, class: "control-label" %>
 					<%= f.text_field :amount, class: 'form-control' %>
+				</div>
+				<div class="form-group col-md-6">
+					<%= f.label :category_id, class: 'control-label' %>
+					<%= f.collection_select :category_id, Category.all, :id, :title , class: 'form-control' %>
 				</div>
 
 				<div class="form-group">
@@ -28,7 +29,7 @@
 					<%#= f.date_select(:date, :order => [:month, :day, :year])%>
 					<%#= f.calendar_date_select "date" %>
 					<div class="input-group date", data-provide="datepicker" data-date-format="yyyy/mm/dd">
-						<%= f.text_field :date, id: "datepicker" %>
+						<%= f.text_field :date,:value => Time.now.strftime('%Y/%m/%d') ,  id: "datepicker" %>
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-th"></span>
 						</div>
@@ -37,9 +38,7 @@
 			</div>	
 
 			<div class="modal-footer">
-				<%= f.submit "Add Income", class: 'btn btn-primary' %>
+				<%= f.submit "Add Income", class: 'btn sign-up' %>
 				<%= link_to "Cancel", '#', class: 'btn', data: {dismiss: "modal"} %>
 			</div>
 		<% end %>
-	</div>
-</div>

@@ -6,16 +6,17 @@ class MembersController < ApplicationController
   def index
     # @members = Member.all
     redirect_to '/' unless current_member.admin?
-    @members = Member.paginate(page: params[:page])
+    @members = Member.current_member.paginate(page: params[:page])
   end
 
   def show
     # @income = Member.incomes
+    @transaction=(current_member.expenses.all + current_member.incomes.all).sort{|a,b| b.date <=> a.date }
     if params[:id] == current_member.id.to_s
       @total = current_member.incomes.sum(:amount) - current_member.expenses.sum(:amount)
       @member = Member.find(params[:id])
-      @income = Member.find(params[:id]).incomes.order(date: :asc)
-      @expense = Member.find(params[:id]).expenses.order(date: :asc)
+      @income = current_member.incomes
+      @expense = current_member.expenses
     else
       redirect_to root_url
     end

@@ -1,9 +1,0 @@
-$("ul.errors").html("")
-<% if @expense.errors.any? %>
-	<% @expenses.errors.full_messages.each do |msg| %>
-		$("ul.errors").append($("<li />")).html("<%= msg.html_safe %>"))
-	<% end %>
-<% else %>
-	$(".expense-index").html("<%= escape_javascript(render 'index') %>")
-	$("#expense-modal").modal("hide")
-<% end %>

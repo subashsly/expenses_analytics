@@ -1,8 +1,7 @@
-<div class="modal-dialog">
-	<div class="modal-content">
+
 		<%= form_for @reminder, remote: true, html: { style: "display:inline" } do |f| %>
 			<div class="modal-body">
-			<h2 style="color: red;">Add Reminder</h2>
+			
 				<ul class="errors"></ul>
 			
 
@@ -13,33 +12,33 @@
 				<%= f.label :title, class: "control-label" %>
 				<%= f.text_field :title, class: 'form-control' %>
 			</div>
+			<div class="form-group">
+				<%= f.label :description, class: "control-label" %>
+				<%= f.text_area :description, class: 'form-control' %>
+			</div>
 
 			<div class="form-group">
 				<%= f.label :amount, class: 'control-label' %>
 				<%= f.text_field :amount, class: 'form-control' %>
 			</div>
 
-			<div>
-				<%= f.label :description, class: "control-label" %>
-				<%= f.text_field :description, class: 'form-control' %>
-			</div>
+			
 
 			<div class="form_group">
 				<%= f.label :date %>
 				<div class="input-group date", data-provide="datepicker" data-date-format="yyyy/mm/dd">
-					<%= f.text_field :date_notify %>
+					<%= f.text_field :date_notify, :value => Time.now.strftime('%Y/%m/%d') %>
 					<div class="input-group-addon">
 						<span class="glyphicon glyphicon-th"></span>
 					</div>
 				</div>
 			</div>
-			
-
-
 			<div>
-				<%= f.submit "Submit", class: 'btn btn-primary' %>
+			
+			<div class="modal-footer">
+				<%= f.submit "Add Reminder", class: 'btn sign-up' %>
+				<%= link_to "Cancel", '#', class: 'btn', data: {dismiss: "modal"} %>
 			</div>
 
+
 		<% end %>
-	</div>
-</div>

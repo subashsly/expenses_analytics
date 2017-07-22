@@ -1,1 +1,10 @@
-<%= render "save" %>	
+$("ul.errors").html("")
+<% if @expense.errors.any? %>
+	<% @expense.errors.full_messages.each do |msg| %>
+		$("ul.errors").append($("<li />").html("<%= msg.html_safe %>"))
+	<% end %>
+<% else %>
+	// $(".expense-index").html("<%= escape_javascript(render 'index') %>")
+	$('#expense-<%= @expense.id %>').replaceWith('<%= j render(@expense) %>') 
+	$("#expense-modal").modal("hide")
+<% end %>

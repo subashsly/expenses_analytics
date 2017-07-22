@@ -1,11 +1,10 @@
-<% @incomes.each do |income| %>
-	<tr>
+<tr id="income-<%= income.id %>">
 		<td><%= income.title %></td>
-		<td><%= income.description %></td>
+		<!-- <td><%= income.description %></td> -->
+		<td><%= income.category.title %></td>
+		<td class="incomes-text" >+ <%= number_with_delimiter(income.amount, :delimiter => ',') %></td>
 		<td><%= income.date %></td>
-		<td><%= income.amount %></td>
 		<td><%= link_to "Edit", edit_income_path(income),
 						remote: true, class: 'btn btn-default' %></td>
 		<td><%= link_to "Delete", income_delete_path(income), remote: true, class: 'btn btn-danger'  %></td>
 	</tr>
-<% end %>
