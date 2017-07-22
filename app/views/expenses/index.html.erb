@@ -14,7 +14,7 @@
 <% @cat= Category.all %>
 	<% @cat.all.each do |x| %>
 		 <%=  x.expenses.each do |y|%>
-		 <%amount=amount +y.amount%>
+		 <%amount=amount + y.amount%>
 	<% end %>
 	<% end %>
 	<%= amount %>
