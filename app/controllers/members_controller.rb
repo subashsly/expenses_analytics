@@ -6,7 +6,7 @@ class MembersController < ApplicationController
   def index
     # @members = Member.all
     redirect_to '/' unless current_member.admin?
-    @members = Member.current_member.paginate(page: params[:page])
+    @members = Member.all.paginate(page: params[:page])
   end
 
   def show

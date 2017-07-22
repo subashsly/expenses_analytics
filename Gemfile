@@ -37,7 +37,8 @@ gem 'bootstrap-datepicker-rails'
 # gem 'bootstrap-slider-rails'
 # For finding torture code
 gem 'flog', '~> 4.3', '>= 4.3.2'
-
+gem 'unicorn', '~> 5.1'
+gem 'rack-handlers'
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
