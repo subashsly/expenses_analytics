@@ -13,9 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-
 //= require_tree .
+//= require turbolinks
 //= require bootstrap-datepicker
+//= require highcharts/highcharts
+//= require highcharts/highcharts-more
+//= require highcharts/highstock
+//= require highcharts/modules/no-data-to-display
 
 $(document).ready(function(){
     $('.datepicker').datepicker();
