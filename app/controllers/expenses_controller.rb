@@ -29,18 +29,18 @@ class ExpensesController < ApplicationController
 
   def create
   	@expenses = current_member.expenses
-    
-    if params[:category_id].nil?
-      @cat=Category.where("title = 'untagged'")
-      print @cat.id
-      print "haha"
-       if (@cat.title =="")
-        @category = Category.create(member_id: current_member.id, title: "untagged")
-      end
-        @expense = Expense.create(expense_params.merge(member_id: current_member.id, category_id: @category.id))
-    else
-       @expense = Expense.create(expense_params.merge(member_id: current_member.id))
-    end
+    @expense = Expense.create(expense_params.merge(member_id: current_member.id))
+    # if params[:category_id].nil?
+    #   @cat=Category.where("title = 'untagged'")
+    #   print @cat.id
+    #   print "haha"
+    #    if (@cat.title =="")
+    #     @category = Category.create(member_id: current_member.id, title: "untagged")
+    #   end
+    #     @expense = Expense.create(expense_params.merge(member_id: current_member.id, category_id: @category.id))
+    # else
+    #    @expense = Expense.create(expense_params.merge(member_id: current_member.id))
+    # end
 
 
 

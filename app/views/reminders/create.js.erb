@@ -9,6 +9,6 @@ var total =$("h3.total_expense").text();
 	 		if (total != "") {
 	 			  location.reload();
 	 		}
-	$("table").append("<%= j render @reminder%>")
+	$("#reminder").append("<%= j render @reminder%>")
 	$("#reminder-modal").modal("hide")
 <% end %>

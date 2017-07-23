@@ -11,6 +11,6 @@ var total =$("h3.total_expense").text();
 	 			  location.reload();
 	 		}
 	 
-	$("#transaction").append("<%= j render @expense%>")
+	$("#expense").append("<%= j render @expense%>")
 	$("#expense-modal").modal("hide")
 <% end %>

@@ -1,16 +1,16 @@
 <div class="container">
-<div class="reminder  table-margin">
+<div class="reminders  table-margin">
             <span><h3>Bill Reminders</h3>  <%= link_to "Add Reminder", new_reminder_path,remote: true, class: 'btn sign-up' %><br/> </span>
         <br />
         <%#= will_paginate @reminders %>
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="reminder">
             <thead>
                 <tr>
                     <th>Title</th>
                     <th>Amount</th>
                     <th>Date</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
+                    <th colspan="2">Action</th>
+                    
                 </tr>
             </thead>
 
