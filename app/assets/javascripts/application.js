@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require highcharts/highstock
 //= require_tree .
 //= require bootstrap-datepicker
 
@@ -43,5 +44,6 @@ function printDiv(divName) {
 	window.print();
 	document.body.innerHTML = originalContents;
 }
+
 
 

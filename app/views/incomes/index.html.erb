@@ -1,14 +1,14 @@
 <% provide(:title, "Income") %>
 <div class="container">
-	<div class="income">
+	<div class="income table-margin">
 	<br/>
 		<%= link_to "Add Income", new_income_path,
 				remote: true, class: 'btn sign-up' %>
-	</div>
+	
 	<br/>
 
-	<div class="new-income"></div>
-	<%= will_paginate @incomes %>
+	
+	
 	<div id="pie" style="height: 400px"></div>
 		<table id="transaction" class="table table-bordered table-striped">
 			<thead>
@@ -37,8 +37,8 @@
 <% end %>
 			</tbody>
 		</table>
-	<%= will_paginate @incomes %>
 	
+	</div>
 </div>
 <div id="income-modal" class="modal fade"></div>
 

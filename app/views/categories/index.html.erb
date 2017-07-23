@@ -1,14 +1,14 @@
 <% provide(:title, "Tags") %>
 <div class="container">
-	<div class="expense">
+	<div class="expense table-margin">
 	<br/>
 		<%= link_to "Add Tag", new_category_path, 
 				remote: true, class: 'btn sign-up' %>
 
-	</div>
+	
 	<br/>
 
-	<table id="category" class="table table-bordered table-striped">
+	<table id="category"  class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<td>Title</td>
@@ -36,6 +36,7 @@
 			</div>
 		</tbody>
 	</table>
+</div>
 </div>
 <div id="category-modal" class="modal fade"></div>
 

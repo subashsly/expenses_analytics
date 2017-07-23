@@ -1,10 +1,10 @@
 <% provide(:title, "Expenses") %>
-<div class="contasiner">
-	<div class="expense">
+<div class="container">
+	<div class="expense table-margin">
 	<br/>
 		<%= link_to "Add Expense", new_expense_path, 
 				remote: true, class: 'btn sign-up' %>
-	</div>
+	
 
 	
 	
@@ -41,6 +41,7 @@
 			<% end %>
 		</tbody>
 	</table>
+</div>
 </div>
 <div id="expense-modal" class="modal fade"></div>
 
