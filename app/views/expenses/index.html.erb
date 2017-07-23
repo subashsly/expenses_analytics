@@ -10,15 +10,7 @@
 	
 	<br/>
 	<br/><br/>
-	<%= amount=0%>
-<% @cat= Category.all %>
-	<% @cat.all.each do |x| %>
-		 <%=  x.expenses.each do |y|%>
-		 <%amount=amount + y.amount%>
-	<% end %>
-	<% end %>
-	<%= amount %>
-
+<%= @expenses_category%>
 	<br/>
 		<div id="pie" style="height: 400px"></div>
 	
@@ -57,6 +49,9 @@
 <div id="ajax">
 	<%#= render :template => 'expenses/index' %>
 </div> -->
+<% sad= "hait"
+	no= 5
+%>
 <script type="text/javascript">
 	Highcharts.chart('pie', {
     chart: {
@@ -78,15 +73,25 @@
             depth: 45
         }
     },
+
     series: [{
         name: 'Delivered amount',
         data: [
             ['Banasssssnas', 12],
-            ['Kiwi', 3],
+            ['<%= sad%>', <%= no%>],
             ['Mixed nuts', 1],
             ['Oranges', 6]
         ]
     }]
 });
 </script>
+
+<%a=[]%>
+<% @expense_category.each do |row| %>
+ <% row.each do |column|%>
+	
+   <%=  a.push(column)  %>
+
+  <% end %>
+<% end %>
 

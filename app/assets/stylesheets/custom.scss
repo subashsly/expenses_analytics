@@ -105,12 +105,29 @@ p {
     transition: .3s all;
 }
 
+
+
+@media only screen and (max-width: 480px){
+  .transaction {
+    margin-left: -30px;
+    }
+    .btn {
+    padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+    }
+    
+}
 .sign-up:hover{
         background: #1985a1 !important;
         color:white !important;
         text-decoration:none;
    
 }
+
+
+
 
 .children{
     background:#1985a1 !important;
@@ -305,7 +322,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url(/assets/header.jpg);
+    background-image: image-url("header.jpg");
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;

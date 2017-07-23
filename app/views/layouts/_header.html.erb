@@ -37,7 +37,7 @@
 							<li class="children-li"><%= link_to "Members", members_path %></li>
 						<% end %>
 						<li class="has-children children  account">
-							<a href="#0"><img src="/assets/cd-avatar.png" alt="avatar">Account</a>
+							<a href="#0"><%= image_tag("cd-avatar.png") %>Account</a>
 							<ul>
 								<li><%= link_to "Profile", current_member, class: "sign-up" %></li>
 								<li><%= link_to "Settings", edit_member_path(current_member), class: "sign-up" %></li>

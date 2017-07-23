@@ -80,12 +80,13 @@ Main Page Content
 }
 @media only screen and (min-width: 1170px) {
   .cd-main-content .content-wrapper {
-    margin-left: 150px;
+    margin-left: 140px;
   }
   .cd-main-content::before {
     content: 'desktop';
   }
 }
+
 
 /* -------------------------------- 
 

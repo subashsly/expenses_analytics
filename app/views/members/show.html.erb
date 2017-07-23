@@ -1,5 +1,5 @@
 <% provide(:title, current_member.member_name) %>
-<!-- <div class="container"> -->
+<div class="container">
 <div class="row" data-no-turbolink="true" >
     <!-- <aside class="col-md-4"> -->
         <!-- <section class="user_info"> -->
@@ -50,8 +50,8 @@
                     <% end %>
 
                     
-                    <td style = "color: green"><h3>+<%= number_with_delimiter(current_member.incomes.sum(:amount), :delimiter => ",") %></h3></td>
-                    <td style = "color: red"><h3>-<%= number_with_delimiter(current_member.expenses.sum(:amount), :delimiter => ",") %></h3></td>
+                    <td style = "color: green"><h3 class="total_income">+<%= number_with_delimiter(current_member.incomes.sum(:amount), :delimiter => ",") %></h3></td>
+                    <td style = "color: red"><h3 class="total_expense">-<%= number_with_delimiter(current_member.expenses.sum(:amount), :delimiter => ",") %></h3></td>
                 </tr>
             </tbody>
         </table>
@@ -59,7 +59,7 @@
             <!-- <div class="test" id="new_test">
 
             </div> -->
-            <div class="rosw" id="chart">
+            <div class="" id="chart">
                 <div class="col-xs-6 col-sm-6" id="printChart" style="height: 400px; width: 40vw;"></div>
                 <div class="col-xs-6 col-sm-6" id="pieChart" style="height: 400px; width: 40vw;"></div>
             </div>
@@ -68,7 +68,10 @@
         <!-- </div> -->
         <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('chart')" %>
         <hr />
-        <div class="reminder">
+
+
+<div class="col-md-12 col-xs-10">
+        <div class="transaction">
             <span><h3>Transaction</h3> | 
             <%= link_to "Add Reminder", new_reminder_path(@reminder),remote: true, class: 'btn btn-default' %> </span>
         <br />
@@ -86,7 +89,11 @@
 
             <tbody class="income-index">
                 <% @transaction.each do |transaction| %>
-                    <tr>
+                <%if transaction.class.table_name=="incomes"%>
+                    <tr id="income-<%= transaction.id %>">
+                    <% else %>
+                    <tr id="expense-<%= transaction.id %>">
+                    <% end %>
                         <td><%= transaction.title %></td>
                         <td><%= transaction.category.title %></td>
                         
@@ -97,16 +104,17 @@
                          <% end %>
                         <td><%= transaction.date %></td>
                         
-                        <td><%= link_to "Edit",  "#", 
-                                        remote: true, class: 'btn btn-default' %></td>
-                        <td><%= link_to "Delete", "#", remote: true, class: 'btn btn-danger' %></td>
+                    <td><%= link_to "Edit", edit_expense_path(transaction), 
+                                    remote: true, class: 'btn btn-default ' %></td>
+                    <td><%= link_to "Delete", expense_delete_path(transaction), remote: true, class: 'btn btn-danger ' %></td>
                     </tr>
                 <% end %>
             </tbody>
             </table>
         </div>
-    </div>
-<!-- </div> -->
+</div>
+</div>
+</div>
 <!-- </div> -->
 <!-- Javascript for running chart (Line chart and PieChart) -->
 <script>

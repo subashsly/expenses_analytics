@@ -4,6 +4,8 @@ $("ul.errors").html("")
 		$("ul.errors").append($("<li />").html("<%= msg.html_safe %>"))
 	<% end %>
 <% else %>
+$("select").append("<option selected value='<%= @category.id%>'><%= @category.title %></option>")
+	
 	$("#category").append("<%= j render @category%>")
 	$("#category-modal").modal("hide")
 <% end %>

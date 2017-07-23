@@ -3,6 +3,11 @@ class ExpensesController < ApplicationController
 
   def index
     @expenses = current_member.expenses
+    @expense_category = []
+        Expense.select('category_id, sum(amount) as total').group('category_id').order('total desc').each do |expense| 
+           category = Category.find(expense.category_id) 
+          @expense_category.push([category.title.to_s,expense.total.to_i])
+    end
     respond_to do |format|
       format.html # renders index.html.erb
       format.js # renders index.js.erb
@@ -24,7 +29,22 @@ class ExpensesController < ApplicationController
 
   def create
   	@expenses = current_member.expenses
-  	@expense = Expense.create(expense_params.merge(member_id: current_member.id))
+    
+    if params[:category_id].nil?
+      @cat=Category.where("title = 'untagged'")
+      print @cat.id
+      print "haha"
+       if (@cat.title =="")
+        @category = Category.create(member_id: current_member.id, title: "untagged")
+      end
+        @expense = Expense.create(expense_params.merge(member_id: current_member.id, category_id: @category.id))
+    else
+       @expense = Expense.create(expense_params.merge(member_id: current_member.id))
+    end
+
+
+
+  	
   end
 
   def edit
@@ -56,5 +76,6 @@ class ExpensesController < ApplicationController
   	def expense_params
   		params.require(:expense).permit(:title, :description, :amount, :date, :category_id).merge(member_id: current_member.id)
   	end
+   
     
 end

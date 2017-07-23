@@ -21,7 +21,7 @@
 				</div>
 				<div class="form-group col-md-6">
 					<%= f.label :category_id, class: 'control-label' %>
-					<%= f.collection_select :category_id, Category.all, :id, :title , class: 'form-control' %>
+					<%= f.collection_select :category_id, current_member.categories.all, :id, :title , class: 'form-control' %>
 				</div>
 
 				<div class="form-group">

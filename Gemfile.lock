@@ -102,8 +102,6 @@ GEM
     guard-minitest (2.3.1)
       guard (~> 2.0)
       minitest (>= 3.0)
-    highcharts-rails (3.0.10)
-      railties (>= 3.1)
     i18n (0.7.0)
     i18n_data (0.7.0)
     jbuilder (2.3.2)
@@ -258,7 +256,6 @@ DEPENDENCIES
   flog (~> 4.3, >= 4.3.2)
   font-awesome-rails
   guard-minitest (= 2.3.1)
-  highcharts-rails (~> 3.0.0)
   jbuilder (~> 2.0)
   jquery-rails
   meta_request

@@ -4,6 +4,11 @@ $("ul.errors").html("")
 		$("ul.errors").append($("<li />").html("<%= msg.html_safe %>"))
 	<% end %>
 <% else %>
+var total =$("h3.total_expense").text();
+	 
+	 		if (total != "") {
+	 			  location.reload();
+	 		}
 	$("#transaction").append("<%= j render @income%>")
 	$("#income-modal").modal("hide")
 <% end %>
