@@ -8,6 +8,7 @@ class ExpensesController < ApplicationController
            category = Category.find(expense.category_id) 
           @expense_category.push([category.title.to_s,expense.total.to_i])
     end
+    @e = [["subash",4]]
     respond_to do |format|
       format.html # renders index.html.erb
       format.js # renders index.js.erb

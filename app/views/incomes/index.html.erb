@@ -4,11 +4,7 @@
 	<br/>
 		<%= link_to "Add Income", new_income_path,
 				remote: true, class: 'btn sign-up' %>
-	
 	<br/>
-
-	
-	
 	<div id="pie" style="height: 400px"></div>
 		<table id="income" class="table table-bordered table-striped">
 			<thead>
@@ -24,25 +20,54 @@
 
 			<tbody class="income-index">
 				<% @incomes.each do |income| %>
-	<tr id="income-<%= income.id %>">
-		<td><%= income.title %></td>
-		<!-- <td><%= income.description %></td> -->
-		<td><%= income.category.title %></td>
-		<td class="incomes-text" >+ <%= number_with_delimiter(income.amount, :delimiter => ',') %></td>
-		<td><%= income.date %></td>
-		<td><%= link_to "Edit", edit_income_path(income),
-						remote: true, class: 'btn btn-default' %></td>
-		<td><%= link_to "Delete", income_delete_path(income), remote: true, class: 'btn btn-danger'  %></td>
-	</tr>
-<% end %>
+				<tr id="income-<%= income.id %>">
+					<td><%= income.title %></td>
+					<!-- <td><%= income.description %></td> -->
+					<td><%= income.category.title %></td>
+					<td class="incomes-text" >+ <%= number_with_delimiter(income.amount, :delimiter => ',') %></td>
+					<td><%= income.date %></td>
+					<td><%= link_to "Edit", edit_income_path(income),
+									remote: true, class: 'btn btn-default' %></td>
+					<td><%= link_to "Delete", income_delete_path(income), remote: true, class: 'btn btn-danger'  %></td>
+				</tr>
+			<% end %>
 			</tbody>
 		</table>
 	
 	</div>
 </div>
+<script type="text/javascript">
+       	var data=[];
+       </script>
+<% Income.select('category_id, sum(amount) as total').group('category_id').order('total desc').each do |income|  %>
+      
+       <%    category = Category.find(income.category_id)  %>
+       
+        <script type="text/javascript">
+        
+        var title = "hait".toString();
+
+        	data.push("["+title, "<%= income.total%>]");
+        </script>  
+
+   <% end %>
+
+    
 <div id="income-modal" class="modal fade"></div>
 
 <script type="text/javascript">
+// .replace('data-','')
+alert(data);
+var bar = data.toString();
+alert(bar);
+
+
+for(var i = 0; i < bar.length; i++) {
+    var bar= bar[i];
+    for(var j = 0; j < bar.length; j++) {
+        alert("bar" + i + "][" + j + "] = " + bar[j]);
+    }
+}
 	Highcharts.chart('pie', {
     chart: {
         type: 'pie',
@@ -66,13 +91,9 @@
 
     series: [{
         name: 'Delivered amount',
-        data:  data: [
-            ['Banasssssnas', 12],
-            ['banana', 25],
-            ['Mixed nuts', 1],
-            ['Oranges', 6]
-        ]
+        data: [[]]
     }]
 });
+
 </script>
 

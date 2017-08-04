@@ -4,12 +4,6 @@
 	<br/>
 		<%= link_to "Add Expense", new_expense_path, 
 				remote: true, class: 'btn sign-up' %>
-	
-
-	
-	
-	<br/>
-	<br/><br/>
 
 	<br/>
 		<div id="pie" style="height: 400px"></div>
@@ -50,10 +44,18 @@
 <div id="ajax">
 	<%#= render :template => 'expenses/index' %>
 </div> -->
-<% sad= "hait"
-	no= 5
-%>
+
+
+
 <script type="text/javascript">
+
+// for(var i = 0; i < bar.length; i++) {
+//     var bar= bar[i];
+//     for(var j = 0; j < bar.length; j++) {
+//         alert(typeof("bar" + i + "][" + j + "] = " + bar[j]));
+//     }
+// }
+// alert(bar);
 	Highcharts.chart('pie', {
     chart: {
         type: 'pie',
@@ -79,7 +81,7 @@
         name: 'Delivered amount',
         data: [
             ['Banasssssnas', 12],
-            ['<%= sad%>', <%= no%>],
+            ['banana', 25],
             ['Mixed nuts', 1],
             ['Oranges', 6]
         ]
@@ -87,12 +89,5 @@
 });
 </script>
 
-<%a=[]%>
-<% @expense_category.each do |row| %>
- <% row.each do |column|%>
-	
-   <%=  a.push(column)  %>
 
-  <% end %>
-<% end %>
 

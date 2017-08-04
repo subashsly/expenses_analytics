@@ -23,7 +23,7 @@
 				<div class="form-group col-md-6">
 					<%= f.label :TAGS, class: 'control-label' %>
 
-					<%= f.collection_select :category_id, current_member.categories.all, :id, :title,{:prompt => 'Please select the author of this post'}, class: 'form-control' %>
+					<%= f.collection_select :category_id, current_member.categories.all, :id, :title, class: 'form-control' %>
 				<%= link_to "Add Tag", new_category_path, 
 				remote: true, class: 'btn sign-up' %>
 
