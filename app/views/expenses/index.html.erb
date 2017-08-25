@@ -65,10 +65,10 @@
         }
     },
     title: {
-        text: 'Contents of Highsoft\'s weekly fruit delivery'
+        text: 'Expenses category'
     },
     subtitle: {
-        text: '3D donut in Highcharts'
+        text: ''
     },
     plotOptions: {
         pie: {
@@ -76,18 +76,16 @@
             depth: 45
         }
     },
-
+<% a = 'Banasssssnas'.to_i%>
+<% b = 5 %>
     series: [{
         name: 'Delivered amount',
-        data: [
-            ['Banasssssnas', 12],
-            ['banana', 25],
-            ['Mixed nuts', 1],
-            ['Oranges', 6]
-        ]
+        data: [<% @expense_category.each do |x,y| %>		
+        ["<%= x%>",<%= y%>],
+			<%end%>]
     }]
 });
 </script>
 
 
-
+<%= b.class %>

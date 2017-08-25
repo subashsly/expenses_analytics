@@ -36,38 +36,16 @@
 	
 	</div>
 </div>
-<script type="text/javascript">
-       	var data=[];
-       </script>
-<% Income.select('category_id, sum(amount) as total').group('category_id').order('total desc').each do |income|  %>
-      
-       <%    category = Category.find(income.category_id)  %>
-       
-        <script type="text/javascript">
-        
-        var title = "hait".toString();
 
-        	data.push("["+title, "<%= income.total%>]");
-        </script>  
 
-   <% end %>
 
     
 <div id="income-modal" class="modal fade"></div>
 
 <script type="text/javascript">
-// .replace('data-','')
-alert(data);
-var bar = data.toString();
-alert(bar);
 
 
-for(var i = 0; i < bar.length; i++) {
-    var bar= bar[i];
-    for(var j = 0; j < bar.length; j++) {
-        alert("bar" + i + "][" + j + "] = " + bar[j]);
-    }
-}
+
 	Highcharts.chart('pie', {
     chart: {
         type: 'pie',
@@ -77,10 +55,10 @@ for(var i = 0; i < bar.length; i++) {
         }
     },
     title: {
-        text: 'Contents of Highsoft\'s weekly fruit delivery'
+        text: 'Income Category'
     },
     subtitle: {
-        text: '3D donut in Highcharts'
+        text: ''
     },
     plotOptions: {
         pie: {
@@ -89,9 +67,11 @@ for(var i = 0; i < bar.length; i++) {
         }
     },
 
-    series: [{
+     series: [{
         name: 'Delivered amount',
-        data: [[]]
+        data: [<% @income_category.each do |x,y| %>		
+        ["<%= x%>",<%= y%>],
+			<%end%>]
     }]
 });
 

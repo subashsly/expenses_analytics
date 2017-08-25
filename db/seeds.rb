@@ -23,17 +23,25 @@ Member.create!(member_name: "subash shahi",
 								activated: true,
 								activated_at: Time.zone.now)
 
+Category.create!(title: "Untagged",
+ description: nil,
+ type: nil,
+ member_id: 1,)
+Category.create!(title: "Untagged",
+ description: nil,
+ type: nil,
+ member_id: 2,)
 
-10.times do |n|
-	member_name = Faker::Name.name
-	member_email = "example-#{n+1}@gmail.com"
-	member_country = Faker::Address.country
-	password = "password"
-	Member.create!(member_name: member_name,
-									member_email: member_email,
-									member_country: member_country,
-									password: password,
-									password_confirmation: password, 
-									activated: true,
-									activated_at: Time.zone.now)
-end
+# 10.times do |n|
+# 	member_name = Faker::Name.name
+# 	member_email = "example-#{n+1}@gmail.com"
+# 	member_country = Faker::Address.country
+# 	password = "password"
+# 	Member.create!(member_name: member_name,
+# 									member_email: member_email,
+# 									member_country: member_country,
+# 									password: password,
+# 									password_confirmation: password, 
+# 									activated: true,
+# 									activated_at: Time.zone.now)
+# end

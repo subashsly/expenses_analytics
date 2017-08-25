@@ -4,7 +4,7 @@ class ExpensesController < ApplicationController
   def index
     @expenses = current_member.expenses
     @expense_category = []
-        Expense.select('category_id, sum(amount) as total').group('category_id').order('total desc').each do |expense| 
+        Expense.select('category_id, sum(amount) as total').group('category_id').order('total desc').where(member_id: current_member.id).each do |expense| 
            category = Category.find(expense.category_id) 
           @expense_category.push([category.title.to_s,expense.total.to_i])
     end

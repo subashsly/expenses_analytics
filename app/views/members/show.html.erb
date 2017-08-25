@@ -230,6 +230,5 @@ $(function () {
 });
 </script>
 
-<%= (3.weeks.ago.to_date..Date.today).map{|date| @income.total_on(date).to_f}.each do |x|%>
-    <%= x.class %>
-<% end %>
+<%= (3.weeks.ago.to_date..Date.today).map{|date| @income.total_on(date).to_f}%>
+

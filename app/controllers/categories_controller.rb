@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
 
 
 	def index
-		@categories = Category.all	
+		@categories = Category.where(member_id: current_member.id)
 		respond_to do |format|
 	      format.html # renders index.html.erb
 	      format.js # renders index.js.erb

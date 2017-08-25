@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
 	belongs_to :member
 	has_many :incomes, dependent: :destroy
 	has_many :expenses, dependent: :destroy
-validates :title, uniqueness: true
+validates :title, uniqueness: {scope: :member_id}
 	validates :title, presence: true
 	validates :member_id, presence: true
 	# validates :description, presence: true
