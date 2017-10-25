@@ -1,15 +1,24 @@
 
 
+
 <% if logged_in? %>
 	
 	<div class="cd-main-header" style="width: 100% !important;">
 		<%= link_to "Expense Analytics", root_path, class: 'navbar-brand page-scroll logo' %>
 		
 		<div class="cd-search is-hidden">
-			<form action="#0">
-				<input type="search" placeholder="Search...">
+			<form action="/members/search" data-remote="true" method="GET">
+				<input autocomplete="off" type="search" placeholder="Search..." name="search" id="search"/>
+				<div class="searchResults" style="color: white;">
+     			 
+			</div>
 			</form>
+			
+    		
 		</div> <!-- cd-search -->
+		
+
+		
 
 		<a href="#0" class="cd-nav-trigger"><span></span></a>
 
@@ -19,6 +28,8 @@
 
 
 			<ul class="cd-top-nav">
+				
+
 				<li class="has-children children add">
 							<%= link_to "<i class='fa fa-plus' aria-hidden='true'></i> ".html_safe, "#0", 
 				remote: true %>
@@ -66,7 +77,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-         <li><%= link_to '<i class="fa fa-sign-up"></i>'.html_safe.concat("Sign Up"),signup_path%></li>
+         <!-- <li><%= link_to '<i class="fa fa-sign-up"></i>'.html_safe.concat("Sign Up"),signup_path%></li> -->
     <li><%= link_to '<i class="fa fa-sign-in"></i>'.html_safe.concat("Log In"), login_path %></li>
       </ul>
     </div>
@@ -74,3 +85,17 @@
 </nav>
 
 <% end %>
+			<script type="text/javascript">
+	$("#search").on("keyup", function (e) {
+		var search_value = $("#search").val();
+		if (search_value != "") {
+			$('form').submit();
+		}else{
+			$(".searchResults").hide();
+			
+		}
+    	
+    	
+        // }
+});
+</script>

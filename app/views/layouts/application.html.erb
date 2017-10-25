@@ -7,7 +7,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
    <meta charset="utf-8">
-     <link rel='icon' href='/assets/favicon.ico?v=5' type='image/x-icon' />
+     <!-- <link rel='icon' href='/assets/favicon.ico?v=5' type='image/x-icon' /> -->
+     <%= favicon_link_tag 'another_image.ico' %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- <script src="http://code.highcharts.com/highcharts.js"></script> -->
@@ -69,13 +70,13 @@
 					
 					<ul>
 						<li><a href="#0">All Notifications</a></li>
-						<li><a href="#0">Friends</a></li>
+						<li><a href="#0">Reminder</a></li>
 						<li><a href="#0">Other</a></li>
 					</ul>
 				</li>
 
 				<li class="has-children comments">
-					<a href="#0">Comments</a>
+					<!-- <a href="#0">Comments</a> -->
 					
 					<ul>
 						<li><a href="#0">All Comments</a></li>
@@ -96,7 +97,7 @@
 						<li><a href="#0">Add User</a></li>
 					</ul>
 				</li>
-				<li class="has-children bookmarks">
+				<!-- <li class="has-children bookmarks">
 					<a href="#0">Bookmarks</a>
 					
 					<ul>
@@ -104,15 +105,15 @@
 						<li><a href="#0">Edit Bookmark</a></li>
 						<li><a href="#0">Import Bookmark</a></li>
 					</ul>
-				</li>
-				<li class="has-children images">
+				</li> -->
+				<!-- <li class="has-children images">
 					<a href="#0">Images</a>
 					
 					<ul>
 						<li><a href="#0">All Images</a></li>
 						<li><a href="#0">Edit Image</a></li>
 					</ul>
-				</li>
+				</li> -->
 
 				<li class="has-children users">
 					<a href="#0">Users</a>
@@ -125,10 +126,10 @@
 				</li>
 			</ul>
 
-			<ul>
+			<!-- <ul>
 				<li class="cd-label">Action</li>
 				<li class="action-btn"><a href="#0">+ Button</a></li>
-			</ul>
+			</ul> -->
 		</nav>
 		<% end %>
 

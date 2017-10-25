@@ -23,7 +23,14 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  resources :members
+  resources :members do
+    collection do 
+      get :search
+      # get :search, :action => 'search_post', :as => 'search_post'
+      # get 'search/:q', :action => 'search', :as => 'search'
+    end
+  end
+
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :incomes do 

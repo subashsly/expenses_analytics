@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :logged_in_member, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_member, only: [:show, :index, :edit, :update, :destroy]
   before_action :correct_member, only: [:edit, :update]
   before_action :admin_member, only: :destroy
 
@@ -11,7 +11,14 @@ class MembersController < ApplicationController
 
   def show
     # @income = Member.incomes
+    if params[:date]
+      @date = params[:date].to_i.weeks.ago
+    else
+      @date = 4.weeks.ago
+    end
+
     @transaction=(current_member.expenses.all + current_member.incomes.all).sort{|a,b| b.date <=> a.date }
+    
     if params[:id] == current_member.id.to_s
       @total = current_member.incomes.sum(:amount) - current_member.expenses.sum(:amount)
       @member = Member.find(params[:id])
@@ -22,6 +29,14 @@ class MembersController < ApplicationController
     end
     # For pagination
     @reminders = current_member.reminders.paginate(:page => 1, :per_page => 2)
+  end
+
+  def search
+    search =  params[:search]
+    @expense=Expense.where('title LIKE ?', "%#{search}%")
+    @income=Income.where('title LIKE ?', "%#{search}%")
+    @category= Category.where('title LIKE ?', "%#{search}%")
+    @search = @expense + @income + @category  
   end
 
   def new

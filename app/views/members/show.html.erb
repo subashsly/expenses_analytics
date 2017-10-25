@@ -27,14 +27,55 @@
     <!-- <div class="col-md-12"> -->
     <br/>
         <div class="income">
+       <style> 
+       .show-date{
+
+        position: absolute !important;
+        top: 100 !important;
+        right: 350 !important;
+       }</style>
+       
         
             <%= link_to "Expenses", expenses_path, class: "btn btn-small sign-up" %>
             <%= link_to "Incomes", incomes_path, class: "btn btn-small sign-up" %>
             <%= link_to "Reminders", reminders_path, class: "btn btn-small sign-up" %>
             <%= link_to "Tags", '#', class: "btn btn-small sign-up" %>
-           
+              <%= link_to "<i class='fa fa-calendar' aria-hidden='true'></i> THIS WEEK <i class='fa fa-arrow-down' aria-hidden='true'></i> ".html_safe, "#0", 
+                remote: true, class: "btn btn-small sign-up" %>
+           <!-- <li class="has-children children add"> -->
+                          
+    <!-- <div class="show-date"> -->
+        <!-- <nav class="cd-nav"> -->
+            <ul class="cd-top-nav btn btn-small sign-up">
+            <li class="has-children children show">
+                            <%= link_to"<i class='fa fa-calendar' aria-hidden='true'></i> THIS WEEK <i class='fa fa-arrow-down' aria-hidden='true'></i> ".html_safe, "#0", 
+                remote: true %>
+                            
+                            <ul>
+                                <li><%= link_to "THIS WEEK", member_path(current_member, date: 1), class: "sign-up" %></li>
+                                <li><%= link_to "LAST WEEK", member_path(current_member, date: 2), class: "sign-up" %></li>
+                                <li><%= link_to "THIS MONTH", member_path(current_member, date: 3), class: "sign-up" %></li>
+                                <li><%= link_to "LAST MONTH", member_path(current_member, date: 4), class: "sign-up" %></li>
+                                                                
+                            </ul>
+                        </li>
+                        </ul>
+                    <!-- </nav> -->
+    <!-- </div> -->
+       <!-- </li>     -->
         </div>
         <br />
+
+        <script type="text/javascript">
+            $("form").bind("keypress", function (e) {
+             if (e.keyCode == 13) {
+             alert("hahah");
+              //add more buttons here
+              return false;
+             }
+}); }      
+          
+        </script>
         <table class="table ">
             <thead>
                 <th><%= "net worth".upcase %></th>
@@ -72,9 +113,9 @@
 
 <div class="col-md-12 col-xs-10">
         <div class="transaction table-margin">
-            <span><h3>Transaction</h3> | 
-            <%= link_to "Add Reminder", new_reminder_path(@reminder),remote: true, class: 'btn btn-default' %> </span>
-        <br />
+            <span><h3>Transaction</h3> 
+            </span>
+        <!-- <br /> -->
         <%#= will_paginate @reminders %>
             <table id="transaction" class="table table-bordered table-striped">
             <thead>
@@ -165,15 +206,15 @@
         },
         series: [{
                     pointInterval: <%= 1.day * 1000 %>,
-                    pointStart: <%= 3.weeks.ago.to_i * 1000%>,
+                    pointStart: <%= @date.to_i * 1000%>,
                     name: 'Income',color: 'green',
-                        data: <%= (3.weeks.ago.to_date..Date.today).map{|date| @income.total_on(date).to_f}.inspect%>
+                        data: <%= (@date.to_date..Date.today).map{|date| @income.total_on(date).to_f}.inspect%>
                     },
                     {
                         pointInterval: <%= 1.day * 1000 %>,
-                    pointStart: <%= 3.weeks.ago.to_i * 1000%>,
+                    pointStart: <%= @date.to_i * 1000%>,
                         name: 'Expenses',
-                         data: <%= (3.weeks.ago.to_date..Date.today).map{|date| @expense.total_on(date).to_f}.inspect%>
+                         data: <%= (@date.to_date..Date.today).map{|date| @expense.total_on(date).to_f}.inspect%>
             }]
     });
 });
@@ -216,12 +257,12 @@ $(function () {
                 colorByPoint: true,
                 data: [{
                     name: 'Expenses',
-                    y: <%= current_member.expenses.sum(:amount) %>,
+                    y: <%= current_member.expenses.where('date >= ?', @date).sum(:amount) %>,
                     sliced: true,
                     selected: true
                 }, {
                     name: 'Incomes',
-                    y: <%= current_member.incomes.sum(:amount) %>,
+                    y: <%= current_member.incomes.where('date >= ?', @date).sum(:amount) %>,
                     color: 'green'
                 }]
             }]

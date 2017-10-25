@@ -1,0 +1,9 @@
+
+
+<ul>
+<% @search.each do |search|%>
+<li><%=search.class.table_name %></li>
+	<li><%= search.title%></li>
+
+<% end %>
+</ul>

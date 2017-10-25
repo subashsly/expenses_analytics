@@ -253,6 +253,8 @@ Header
   -ms-appearance: none;
   -o-appearance: none;
   appearance: none;
+  margin-bottom:0px;
+  
 }
 .cd-search input:focus {
   outline: none;

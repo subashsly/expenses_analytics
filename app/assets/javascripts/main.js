@@ -1,4 +1,5 @@
 jQuery(document).ready(function(){
+
 	//cache DOM elements
 	var mainContent = $('.cd-main-content'),
 		header = $('.cd-main-header'),
@@ -9,6 +10,7 @@ jQuery(document).ready(function(){
 		searchForm = $('.cd-search'),
 		accountInfo = $('.account');
 		addInfo = $('.add');
+		showInfo = $('.show');
 
 	//on resize, move search and top nav position according to window width
 	var resizing = false;
@@ -48,6 +50,8 @@ jQuery(document).ready(function(){
 				sidebar.find('.has-children.selected').removeClass('selected');
 				accountInfo.removeClass('selected');
 				addInfo.removeClass('selected');
+				showInfo.removeClass('selected');
+				
 				selectedItem.parent('li').addClass('selected');
 			}
 		}
@@ -60,6 +64,16 @@ jQuery(document).ready(function(){
 		if( mq == 'desktop') {
 			event.preventDefault();
 			accountInfo.toggleClass('selected');
+			sidebar.find('.has-children.selected').removeClass('selected');
+		}
+	});
+	//click on account and show submenu - desktop version only
+	showInfo.children('a').on('click', function(event){
+		var mq = checkMQ(),
+			selectedItem = $(this);
+		if( mq == 'desktop') {
+			event.preventDefault();
+			showInfo.toggleClass('selected');
 			sidebar.find('.has-children.selected').removeClass('selected');
 		}
 	});
@@ -80,6 +94,7 @@ jQuery(document).ready(function(){
 			sidebar.find('.has-children.selected').removeClass('selected');
 			accountInfo.removeClass('selected');
 			addInfo.removeClass('selected');
+			showInfo.removeClass('selected');
 		}
 	});
 
@@ -145,3 +160,5 @@ jQuery(document).ready(function(){
 		scrolling = false;
 	}
 });
+
+

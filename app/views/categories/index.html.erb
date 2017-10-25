@@ -12,11 +12,9 @@
 		<thead>
 			<tr>
 				<td>Title</td>
-				<td>Description</td>
-				<td>Tags</td>
-				<td>Amount</td>
-				<td>Date</td>
-				<th colspan="2">Action</th>
+				<td>No. of  Income Transaction</td>
+				<td>No. of  expense Transaction</td>
+				<td colspan="2">action</td>
 			</tr>
 		</thead>
 
@@ -25,8 +23,9 @@
 			<div id="ajax">
 				<% @categories.each do |category| %>
 					<tr id="category-<%= category.id%>">
-						<td><%= category.title %></td>
-						<td><%= category.description %></td>
+						<td><%= link_to category.title, category_path(category) %></td>
+						<td><%= category.incomes.count %></td>
+						<td><%= category.expenses.count %></td>
 						
 						<td><%= link_to "Edit", edit_category_path(category), 
 										remote: true, class: 'btn btn-default' %></td>

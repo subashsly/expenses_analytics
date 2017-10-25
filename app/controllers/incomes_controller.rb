@@ -1,22 +1,17 @@
 class IncomesController < ApplicationController
-		
-
 
 	def index
 		@incomes = current_member.incomes.paginate(:page => 1, :per_page => 5)
-		  @income_category = Array.new
-        Income.select('category_id, sum(amount) as total').group('category_id').order('total desc').each do |income| 
-           category = Category.find(income.category_id) 
-          @income_category.push([category.title.to_s,income.total.to_i])
-          
-    end
-         
-		
+		@income_category = Array.new
+
+	    Income.select('category_id, sum(amount) as total').group('category_id').order('total desc').each do |income| 
+		    category = Category.find(income.category_id) 
+		    @income_category.push([category.title.to_s,income.total.to_i])
+   		end   
 	end
 
 	def show
 		@income = Income.find(params[:id])
-		
 	end
 
 	def new
@@ -35,12 +30,10 @@ class IncomesController < ApplicationController
 	def update
 		@incomes = current_member.incomes 
 		@income = Income.find(params[:id])
-
 		@income.update_attributes(income_params)
 	end
 
 	def delete
-		
 		@income = Income.find(params[:income_id])
 	end
 
