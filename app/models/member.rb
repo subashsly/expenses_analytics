@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
 	has_many :incomes, dependent: :destroy
+	has_many :contacts, dependent: :destroy
 	has_many :expenses
 	has_many :reminders
 	has_many :categories

@@ -48,14 +48,15 @@
         <!-- <nav class="cd-nav"> -->
             <ul class="cd-top-nav btn btn-small sign-up">
             <li class="has-children children show">
-                            <%= link_to"<i class='fa fa-calendar' aria-hidden='true'></i> THIS WEEK <i class='fa fa-arrow-down' aria-hidden='true'></i> ".html_safe, "#0", 
+                            <%= link_to"<i class='fa fa-calendar' aria-hidden='true'></i> #{@week} <i class='fa fa-arrow-down' aria-hidden='true'></i> ".html_safe, "#0", 
                 remote: true %>
                             
                             <ul>
                                 <li><%= link_to "THIS WEEK", member_path(current_member, date: 1), class: "sign-up" %></li>
                                 <li><%= link_to "LAST WEEK", member_path(current_member, date: 2), class: "sign-up" %></li>
-                                <li><%= link_to "THIS MONTH", member_path(current_member, date: 3), class: "sign-up" %></li>
-                                <li><%= link_to "LAST MONTH", member_path(current_member, date: 4), class: "sign-up" %></li>
+                                <li><%= link_to "THIS MONTH", member_path(current_member, date: 4), class: "sign-up" %></li>
+                                <li><%= link_to "LAST MONTH", member_path(current_member, date: 8), class: "sign-up" %></li>
+
                                                                 
                             </ul>
                         </li>
@@ -262,5 +263,5 @@ $(function () {
 });
 </script>
 
-<%= (3.weeks.ago.to_date..Date.today).map{|date| @income.total_on(date).to_f}%>
+
 

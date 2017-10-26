@@ -12,8 +12,18 @@ class MembersController < ApplicationController
   def show
     # @income = Member.incomes
     if params[:date]
+      if params[:date].to_i ==4 
+        
+      elsif params[:date].to_i ==1
+        @week = "THIS WEEK"
+      elsif params[:date].to_i ==2
+        @week = "LAST WEEK"
+      else
+        @week = "LAST MONTH"
+      end
       @date = params[:date].to_i.weeks.ago
     else
+      @week = "THIS MONTH"
       @date = 4.weeks.ago
     end
 

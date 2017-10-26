@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :contacts do
+    get "delete"
+  end
   get 'expenses/index'
 
   get 'expenses/new'
@@ -45,4 +48,6 @@ Rails.application.routes.draw do
   resources :reminders do
    get "delete"
  end
+ 
+
 end
