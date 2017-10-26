@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
- 
+  before_action :logged_in_member, only: [:new, :create]
   def new
    
   end
@@ -28,6 +28,19 @@ class SessionsController < ApplicationController
   	log_out if logged_in?
     redirect_to root_url
   end
+
+private
+  def logged_in_member
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please Log In"
+        redirect_to login_url
+      else
+        redirect_to root_url
+      end
+    end
+
+
 
 
   
