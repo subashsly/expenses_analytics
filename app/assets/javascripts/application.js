@@ -49,5 +49,13 @@ function printDiv(divName) {
 	document.body.innerHTML = originalContents;
 }
 
+   $("form").bind("keypress", function (e) {
+             if (e.keyCode == 13) {
+             alert("hahah");
+              //add more buttons here
+              return false;
+             }
+}); }      
+         
 
 
