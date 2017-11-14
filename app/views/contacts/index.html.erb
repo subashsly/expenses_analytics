@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<%= link_to 'New Contact', new_contact_path %>
+
 
 <% provide(:title, "Contacts") %>
 <div class="container">
@@ -9,9 +9,10 @@
         remote: true, class: 'btn sign-up' %>
 
   <br/>
+  <br/>
 
   
-  <table id="expense" class="table table-bordered table-striped">
+  <table id="contact" class="table table-bordered table-striped">
     <thead>
       <tr>
         <td>Name</td>
@@ -22,14 +23,14 @@
       </tr>
     </thead>
 
-    <tbody class="expense-index">
+    <tbody class="contact-index">
       <% @contacts.each do |contact| %>
         <tr id="contact-<%= contact.id%>">
           <td><%= contact.name %></td>
           <td><%= contact.phone_no %></td>
           <td><%= contact.address %></td>
           <td><%= link_to 'Edit', edit_contact_path(contact),  remote: true, class: 'btn btn-default' %></td>
-          <td><%= link_to 'Destroy', contact, method: :delete,  remote: true, class: 'btn btn-danger'  %></td>
+          <td><%= link_to 'Delete', contact_delete_path(contact),  remote: true, class: 'btn btn-danger'  %></td>
         </tr>
       <% end %>
     </tbody>

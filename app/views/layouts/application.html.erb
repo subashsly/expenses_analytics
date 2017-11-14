@@ -92,8 +92,8 @@
 					<a href="#0">Contacts</a>
 					
 					<ul>
-						<li><%= link_to "Add Contact", members_path %></li>
-						<li><a href="#0">Edit User</a></li>
+						<li><%= link_to "Add Contact", new_contact_path, remote:true %></li>
+						<li><%= link_to "View Contact", contacts_path %></li>
 						<li><a href="#0">Add User</a></li>
 					</ul>
 				</li>
@@ -160,6 +160,7 @@
 <div id="expense-modal" class="modal fade"></div>
 <div id="reminder-modal" class="modal fade"></div>
 <div id="income-modal" class="modal fade"></div>
+<div id="contact-modal" class="modal fade"></div>
 <div id="category-modal" class="modal fade"></div>
 		<%if !logged_in? %>
 		<%= render 'layouts/footer' %>
